@@ -42,12 +42,7 @@ trigger:
 action:
 - choose:
   - conditions:
-    - condition: template
-      value_template: '{{ trigger.event.data.command == "toggle" }}'
-    sequence: !input 'press_action'
-  - conditions:
-    - '{{ topic.split(''/'')[1].replace(''/'', '''') == deviceName.split('' '')[0]
-      }}'
+    - '{{ topic.split(''/'')[1].replace(''/'', '''') == deviceName.split('' '')[0] }}'
     sequence:
       - choose:
         - conditions:
