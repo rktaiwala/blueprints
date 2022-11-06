@@ -44,15 +44,15 @@ trigger:
 action:
 - choose:
   - conditions:
-    - '{{ topic.split(''/'')[1].replace(''/'', '''') == deviceName.split('' '')[0] }}'
+    - '{{ trigger.topic.split(''/'')[1].replace(''/'', '''') == deviceName.split('' '')[0] }}'
     sequence:
       - choose:
         - conditions:
-          - '{{ command == ''single'' }}'
+          - '{{ trigger.payload == ''single'' }}'
           sequence: !input 'press_action'
         - conditions:
-          - '{{ command == ''double'' }}'
+          - '{{ trigger.payload == ''double'' }}'
           sequence: !input 'double_press_action'
         - conditions:
-          - '{{ command == ''long'' }}'
+          - '{{ trigger.payload == ''long'' }}'
           sequence: !input 'hold_action'
