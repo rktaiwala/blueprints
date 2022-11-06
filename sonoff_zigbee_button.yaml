@@ -10,7 +10,7 @@ blueprint:
       selector:
         device:
           manufacturer: SONOFF
-          model: SNZB-01
+          model: Wireless button (SNZB-01)
     press_action:
       name: Press Action
       description: Action to perform on Press.
