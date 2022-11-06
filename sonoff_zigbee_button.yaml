@@ -35,6 +35,8 @@ variables:
   press_action: !input 'press_action'
   double_press_action: !input 'double_press_action'
   hold_action: !input 'hold_action'
+  command: '{{ trigger.payload }}'
+  topic: '{{ trigger.topic }}'
   deviceName: "{{ state_attr(button_id, 'friendly_name') }}"
 trigger:
 - platform: mqtt
