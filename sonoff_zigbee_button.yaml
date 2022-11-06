@@ -39,15 +39,15 @@ variables:
   topic: "{{ trigger.topic }}"
   deviceName: "{{ state_attr(button_id, 'friendly_name') }}"
 trigger_variables:
-  tpc: "{{ state_attr(button_id, 'friendly_name') }}"
+  tpc: '{{ state_attr(button_id, 'friendly_name') }}'
 trigger:
 - platform: mqtt
-  topic: "{{ 'zigbee2mqtt/' ~ tpc ~ '/action' }}"
+  topic: '{{ 'zigbee2mqtt/' ~ tpc ~ '/action' }}'
 action:
 - choose:
   - conditions:
     - condition: template 
-      value_template: '{{ trigger.payload == ''single'' }}'
+      value_template: '{{ trigger.payload == "single" }}'
     sequence: !input 'press_action'
   - conditions:
     - condition: template 
