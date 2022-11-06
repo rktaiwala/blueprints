@@ -35,11 +35,10 @@ variables:
   press_action: !input 'press_action'
   double_press_action: !input 'double_press_action'
   hold_action: !input 'hold_action'
+  deviceName: "{{ state_attr(button_id, 'friendly_name') }}"
 trigger:
-- platform: event
-  event_type: zha_event
-  event_data:
-    device_id: !input 'button_id'
+- platform: mqtt
+  topic: zigbee2mqtt/+/action
 action:
 - choose:
   - conditions:
@@ -47,10 +46,16 @@ action:
       value_template: '{{ trigger.event.data.command == "toggle" }}'
     sequence: !input 'press_action'
   - conditions:
-    - condition: template
-      value_template: '{{ trigger.event.data.command == "on" }}'
-    sequence: !input 'double_press_action'
-  - conditions:
-    - condition: template
-      value_template: '{{ trigger.event.data.command == "off" }}'
-    sequence: !input 'hold_action'
+    - '{{ topic.split(''/'')[1].replace(''/'', '''') == deviceName.split('' '')[0]
+      }}'
+    sequence:
+      - choose:
+        - conditions:
+          - '{{ command == ''single'' }}'
+          sequence: !input 'press_action'
+        - conditions:
+          - '{{ command == ''double'' }}'
+          sequence: !input 'double_press_action'
+        - conditions:
+          - '{{ command == ''long'' }}'
+          sequence: !input 'hold_action'
