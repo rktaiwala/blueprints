@@ -37,7 +37,7 @@ variables:
   hold_action: !input 'hold_action'
   command: '{{ trigger.payload }}'
   topic: '{{ trigger.topic }}'
-  deviceName: "{{ state_attr(button_id, 'Friendly name') }}"
+  deviceName: "{{ device_attr(button_id, 'name') }}"
 trigger:
 - platform: mqtt
   topic: "zigbee2mqtt/+/action"
