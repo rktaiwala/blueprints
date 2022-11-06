@@ -44,16 +44,16 @@ trigger:
 - platform: mqtt
   topic: "{{ 'zigbee2mqtt/' ~ tpc ~ '/action' }}"
 action:
-  - choose:
-    - conditions:
-      - condition: template 
-        value_template: '{{ trigger.payload == ''single'' }}'
-      sequence: !input 'press_action'
-    - conditions:
-      - condition: template 
-        value_template: '{{ trigger.payload == ''double'' }}'
-      sequence: !input 'double_press_action'
-    - conditions:
-      - condition: template 
-        value_template: '{{ trigger.payload == ''long'' }}'
-      sequence: !input 'hold_action'
+- choose:
+  - conditions:
+    - condition: template 
+      value_template: '{{ trigger.payload == ''single'' }}'
+    sequence: !input 'press_action'
+  - conditions:
+    - condition: template 
+      value_template: '{{ trigger.payload == ''double'' }}'
+    sequence: !input 'double_press_action'
+  - conditions:
+    - condition: template 
+      value_template: '{{ trigger.payload == ''long'' }}'
+    sequence: !input 'hold_action'
