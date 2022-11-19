@@ -2,7 +2,7 @@ blueprint:
   name: Motion-activated Light Switch
   description: Turn on a switch when motion is detected.
   domain: automation
-  source_url: https://github.com/rktaiwala/blueprints/motion_activated_light.yaml
+  source_url: https://github.com/rktaiwala/blueprints/blob/main/motion_activated_light.yaml
   input:
     motion_entity:
       name: Motion Sensor
